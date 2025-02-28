@@ -1,4 +1,4 @@
-from node import Node
+from .node import Node
 
 class DoublyLinkedList():
     def __init__(self)->None:
@@ -51,6 +51,7 @@ class DoublyLinkedList():
         if self.is_empty():
             self.head=node
             self.tail=self.head
+            self.size+=1
             return
         old_head=self.head
         old_head.prev=node
