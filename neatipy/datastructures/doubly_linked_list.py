@@ -1,13 +1,13 @@
 from node import Node
 
 class DoublyLinkedList():
-    def __init__(self,max_size:int=128)->None:
-        self._max_size=max_size
+    def __init__(self)->None:
         self.size=0
         self.head=None
         self.tail=None
     
     def is_empty(self)->bool:
+        """Checks if DLL is empty"""
         return self.head is None
     
 
@@ -57,5 +57,3 @@ class DoublyLinkedList():
         self.head=node
         self.head.next=old_head
         self.size+=1
-        if self.size>self._max_size:
-            self.remove_from_tail()
