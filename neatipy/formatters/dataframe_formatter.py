@@ -44,6 +44,5 @@ class DataFrameFormatter(BaseFormatter):
                     yield format_rule.format(dlist[index])
                 yield "\n"
             yield line
-        result=f"DataFrame:\n{"".join(column_generator())}{"".join(data_generator())}"
-        return result
+        return f"DataFrame:\n{"".join(column_generator())}{"".join(data_generator())}"
 
