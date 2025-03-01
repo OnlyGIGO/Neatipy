@@ -4,7 +4,7 @@ from formatters import StringFormatter
 from formatters import IntFormatter
 class NeatipyFormatter:
     @staticmethod
-    def format(obj):
+    def format(obj:any)->str:
         match obj:
             case float():
                 return FloatFormatter.format(obj)
