@@ -10,7 +10,6 @@ class DataFrameFormatter(BaseFormatter):
     @staticmethod
     @LRUCache.lru_cache(max_size=256)
     def format(obj: DataFrame) -> str:
-        result = "DataFrame:\n"
         cols = obj.columns
         data = obj.values
         col_amnt = len(cols)
@@ -44,7 +43,6 @@ class DataFrameFormatter(BaseFormatter):
                     yield format_rule.format(dlist[index])
                 yield "\n"
             yield "-" * width + "\n"
-        result+="".join(column_generator())
-        result+="".join(data_generator())
+        result=f"DataFrame:\n{"".join(column_generator())}{"".join(data_generator())}"
         return result
 
