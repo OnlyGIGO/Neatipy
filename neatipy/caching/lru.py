@@ -1,6 +1,6 @@
 
-from . import DoublyLinkedList
-from .node import Node
+from datastructures import DoublyLinkedList
+from datastructures import Node
 from dataclasses import is_dataclass
 
 class LRUCache():

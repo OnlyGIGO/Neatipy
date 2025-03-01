@@ -1,12 +1,16 @@
 
-from datastructures import LRUCache 
-
+from formatters import FloatFormatter
+from formatters import StringFormatter
+from formatters import IntFormatter
 class NeatipyFormatter:
     @staticmethod
-    @LRUCache.lru_cache(max_size=256)
     def format(obj):
         match obj:
             case float():
-                return f"Float: {obj:.2f}"
+                return FloatFormatter.format(obj)
+            case int():
+                return IntFormatter.format(obj)
+            case str():
+                return StringFormatter.format(obj)
             case _:
-                return str(obj)
+                return repr(obj)
