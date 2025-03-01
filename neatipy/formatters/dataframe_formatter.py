@@ -29,20 +29,21 @@ class DataFrameFormatter(BaseFormatter):
                 longest = max(longest, data_length, col_length)
             longest_datas[col] = longest
         width = (sum(longest_datas.values()) + (col_amnt * DataFrameFormatter.spacing) + 2 * col_amnt)
+        line="-" * width + "\n"
         def column_generator():
-            yield "-" * width + "\n"
+            yield line
             for _, col in enumerate(cols):
                 format_rule = "|{:" + format_chr + str(longest_datas[col] + DataFrameFormatter.spacing) + "}|"
                 yield format_rule.format(col)
             yield "\n"
-            yield "-" * width + "\n"
+            yield line
         def data_generator():
             for _, dlist in enumerate(data):
                 for index, col in enumerate(cols):
                     format_rule = "|{:" + format_chr + str(longest_datas[col] + DataFrameFormatter.spacing) + "}|"
                     yield format_rule.format(dlist[index])
                 yield "\n"
-            yield "-" * width + "\n"
+            yield line
         result=f"DataFrame:\n{"".join(column_generator())}{"".join(data_generator())}"
         return result
 
