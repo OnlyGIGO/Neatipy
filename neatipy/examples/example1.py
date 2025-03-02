@@ -1,4 +1,5 @@
 from core import Neatipy
+from core import NeatipyFormatter
 import pandas as pd
 import numpy as np
 from dataclasses import dataclass, field
@@ -100,3 +101,5 @@ print("First print took", time.time() - start, "seconds")
 start = time.time()
 Neatipy.neatipy_print(complex_instance)
 print("Second print took", time.time() - start, "seconds")
+
+print(NeatipyFormatter.format((1,2,3,)))
