@@ -9,3 +9,4 @@ from .bool_formatter import BoolFormatter
 from .set_formatter import SetFormatter
 from .dict_formatter import DictFormatter
 from .frozenset_formatter import FrozenSetFormatter
+from .numpy_array_formatter import NumpyArrayFormatter

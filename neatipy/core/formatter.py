@@ -10,7 +10,9 @@ from formatters import BoolFormatter
 from formatters import SetFormatter
 from formatters import DictFormatter
 from formatters import FrozenSetFormatter
+from formatters import NumpyArrayFormatter
 import pandas as pd
+import numpy as np
 class NeatipyFormatter:
     @staticmethod
     def format(obj:any,_depth:int=0)->str:
@@ -33,6 +35,8 @@ class NeatipyFormatter:
                 return SetFormatter.format(obj,_depth)
             case frozenset():
                 return FrozenSetFormatter.format(obj,_depth)
+            case np.ndarray():
+                return NumpyArrayFormatter.format(obj,_depth)
             case pd.DataFrame():
                 return DataFrameFormatter.format(obj)
             case _ if type(obj).__repr__ is not object.__repr__:#checking that the object's repr is not just the default one
