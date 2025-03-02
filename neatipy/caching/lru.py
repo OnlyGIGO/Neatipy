@@ -1,30 +1,48 @@
-
 from neatipy.datastructures import DoublyLinkedList
 from neatipy.datastructures import Node
 from dataclasses import is_dataclass
 from typing import Callable
 
-class LRUCache():
+
+class LRUCache:
     cache = {}
     doubly_linked_list = DoublyLinkedList()
     _immutables = (tuple, str, int, float, bool, frozenset)
+
     @staticmethod
-    def is_immutable(obj:any)->bool:
+    def is_immutable(obj: any) -> bool:
         """Is immutable helper function"""
         if isinstance(obj, LRUCache._immutables):
             return True
-        if is_dataclass(obj) and getattr(obj, '__dataclass_fields__', None) and hasattr(obj, '__hash__'):
-            return all(LRUCache.is_immutable(getattr(obj, field)) for field in obj.__dataclass_fields__)
+        if (
+            is_dataclass(obj)
+            and getattr(obj, "__dataclass_fields__", None)
+            and hasattr(obj, "__hash__")
+        ):
+            return all(
+                LRUCache.is_immutable(getattr(obj, field))
+                for field in obj.__dataclass_fields__
+            )
         return False
 
     @staticmethod
-    def lru_cache(max_size:int=128)->Callable:
+    def lru_cache(max_size: int = 128) -> Callable:
         """LRU cache decorator."""
+
         def decorator(func):
             def wrapper(*args, **kwargs):
-                if not args: return func(*args, **kwargs)
+                if not args:
+                    return func(*args, **kwargs)
                 obj = args[0]
-                if  isinstance(obj, LRUCache._immutables) or (is_dataclass(obj) and getattr(obj, '__dataclass_fields__', None) and hasattr(obj, '__hash__') and all(LRUCache.is_immutable(getattr(obj, field)) for field in obj.__dataclass_fields__)):
+                if isinstance(obj, LRUCache._immutables) or (
+                    is_dataclass(obj)
+                    and getattr(obj, "__dataclass_fields__", None)
+                    and hasattr(obj, "__hash__")
+                    and all(
+                        LRUCache.is_immutable(getattr(obj, field))
+                        for field in obj.__dataclass_fields__
+                    )
+                ):
                     node = LRUCache.cache.get(id(obj), None)
                     if node is None:
                         ret_val = func(*args, **kwargs)
@@ -42,5 +60,7 @@ class LRUCache():
                         return node.val
                 else:
                     return func(*args, **kwargs)
+
             return wrapper
+
         return decorator
