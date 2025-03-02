@@ -5,6 +5,7 @@ from formatters import IntFormatter
 from formatters import DataFrameFormatter
 from formatters import ClassFormatter
 from formatters import ListFormatter
+from formatters import TupleFormatter
 import pandas as pd
 class NeatipyFormatter:
     @staticmethod
@@ -18,6 +19,8 @@ class NeatipyFormatter:
                 return StringFormatter.format(obj)
             case list():
                 return ListFormatter.format(obj,_depth)
+            case tuple():
+                return TupleFormatter.format(obj,_depth)
             case pd.DataFrame():
                 return DataFrameFormatter.format(obj)
             case _ if type(obj).__repr__ is not object.__repr__:#checking that the object's repr is not just the default one
