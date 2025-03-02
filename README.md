@@ -48,7 +48,7 @@ Neatipy avoids repetitive calculations by implementing a **custom LRU cache**, o
 ```python
 from neatipy import NeatipyFormatter
 
-def expensive_formatting(obj:tuple) -> str:
+def expensive_formatting(obj: tuple) -> str:
     return NeatipyFormatter.format(obj)  # This will be cached for reuse, as wil all relatively heavy immutable object that may require a lot of formatting
 
 print(expensive_formatting((1,2,3,))) # First call, will be cached
@@ -70,10 +70,10 @@ Unlike traditional formatting libraries, **Neatipy** focuses on:
 
 ## 🛠️ API Reference
 
-### `Neatipy.nprint(obj)->None`
+### `Neatipy.nprint(obj: any) -> None`
 Nicely prints an object with auto-detection of formatting style. Uses formatter internally.
 
-### `NeatipyFormatter.format(obj) -> str`
+### `NeatipyFormatter.format(obj: any) -> str`
 Formats an object into a readable string while leveraging caching.
 
 
