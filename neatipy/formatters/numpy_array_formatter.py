@@ -1,4 +1,4 @@
-from caching import LRUCache
+from neatipy.caching import LRUCache
 from .base_formatter import BaseFormatter
 import numpy as np
 class NumpyArrayFormatter(BaseFormatter):

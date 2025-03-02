@@ -1,4 +1,4 @@
-from caching import LRUCache
+from neatipy.caching import LRUCache
 from .base_formatter import BaseFormatter
 class IntFormatter(BaseFormatter):
     @staticmethod

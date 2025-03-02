@@ -1,5 +1,5 @@
-from core import Neatipy
-from core import NeatipyFormatter
+from neatipy import Neatipy
+from neatipy import NeatipyFormatter
 import pandas as pd
 import numpy as np
 from dataclasses import dataclass, field
@@ -8,8 +8,8 @@ from collections.abc import Mapping
 import time
 
 # Basic examples
-Neatipy.neatipy_print(3.141)
-Neatipy.neatipy_print("Hello world")
+Neatipy.nprint(3.141)
+Neatipy.nprint("Hello world")
 
 data = {
     'Name': ['Alice', 'Bob', 'Charlie', 'David'],
@@ -52,15 +52,15 @@ nested_array = np.array([
     np.array([(1, 2.5, 'x'), (3, 4.5, 'y')], dtype=[('int', np.int32), ('float', np.float64), ('char', 'U1')])
 ], dtype=object)
 
-Neatipy.neatipy_print(df)
-Neatipy.neatipy_print(car)
-Neatipy.neatipy_print(lst)
-Neatipy.neatipy_print(tpl)
-Neatipy.neatipy_print(dct)
-Neatipy.neatipy_print(st)
-Neatipy.neatipy_print(frozenst)
-Neatipy.neatipy_print(True)
-Neatipy.neatipy_print(nested_array)
+Neatipy.nprint(df)
+Neatipy.nprint(car)
+Neatipy.nprint(lst)
+Neatipy.nprint(tpl)
+Neatipy.nprint(dct)
+Neatipy.nprint(st)
+Neatipy.nprint(frozenst)
+Neatipy.nprint(True)
+Neatipy.nprint(nested_array)
 
 @dataclass(frozen=True)
 class NestedDetail:
@@ -96,10 +96,10 @@ complex_instance = ComplexNested(
 )
 #timing the prints of the frozen dataclasses to see the effects of our LRU cache properly
 start = time.time()
-Neatipy.neatipy_print(complex_instance)
+Neatipy.nprint(complex_instance)
 print("First print took", time.time() - start, "seconds")
 start = time.time()
-Neatipy.neatipy_print(complex_instance)
+Neatipy.nprint(complex_instance)
 print("Second print took", time.time() - start, "seconds")
 
 print(NeatipyFormatter.format((1,2,3,)))

@@ -34,11 +34,11 @@ pip install ./Neatipy
 ### ✨ Basic Example
 
 ```python
-from core import Neatipy
+from neatipy import Neatipy
 
 data = {"name": "Neatipy", "version": 0.1, "features": ["LRU Cache", "Fast Formatting"]}
 
-Neatipy.neatipy_print(data)
+Neatipy.nprint(data)
 ```
 
 ### ⚡ Performance Boosting with Custom LRU Cache
@@ -46,7 +46,7 @@ Neatipy.neatipy_print(data)
 Neatipy avoids repetitive calculations by implementing a **custom LRU cache**, optimizing formatting calls for frequently processed objects:
 
 ```python
-from core import NeatipyFormatter
+from neatipy import NeatipyFormatter
 
 def expensive_formatting(obj:tuple) -> str:
     return NeatipyFormatter.format(obj)  # This will be cached for reuse, as wil all relatively heavy immutable object that may require a lot of formatting
@@ -70,7 +70,7 @@ Unlike traditional formatting libraries, **Neatipy** focuses on:
 
 ## 🛠️ API Reference
 
-### `Neatipy.neatipy_print(obj)->None`
+### `Neatipy.nprint(obj)->None`
 Nicely prints an object with auto-detection of formatting style. Uses formatter internally.
 
 ### `NeatipyFormatter.format(obj) -> str`

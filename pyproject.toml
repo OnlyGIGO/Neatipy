@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Neatipy"
+version = "0.1.0"
+description = "Python object formatting and printing library"
+readme = "README.md"
+authors = [
+    { name = "Vilppu Tiilikainen", email = "vilppu.tiilikainen123@gmail.com" }
+]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=2.2.0",
+    "pandas>=2.2.0"
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: MIT License"
+]
+
+[project.urls]
+Homepage = "https://github.com/OnlyGIGO/Neatipy"
+Repository = "https://github.com/OnlyGIGO/Neatipy"
+
+[tool.setuptools]
+packages = ["Neatipy"]
+
+[tool.setuptools.package-data]
+Neatipy = ["*.md"]  

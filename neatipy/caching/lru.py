@@ -1,6 +1,6 @@
 
-from datastructures import DoublyLinkedList
-from datastructures import Node
+from neatipy.datastructures import DoublyLinkedList
+from neatipy.datastructures import Node
 from dataclasses import is_dataclass
 
 class LRUCache():

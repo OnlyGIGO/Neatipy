@@ -1,6 +1,6 @@
 import pandas
 from pandas import DataFrame
-from caching import LRUCache
+from neatipy.caching import LRUCache
 from .base_formatter import BaseFormatter
 
 class DataFrameFormatter(BaseFormatter):
