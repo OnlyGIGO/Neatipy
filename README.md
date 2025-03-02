@@ -51,7 +51,7 @@ from neatipy import NeatipyFormatter
 def expensive_formatting(obj: tuple) -> str:
     return NeatipyFormatter.format(obj)  # This will be cached for reuse, as wil all relatively heavy immutable object that may require a lot of formatting
 
-print(expensive_formatting((1,2,3,))) # First call, will be cached
+print(expensive_formatting((1,2,3,)))  # First call, will be cached
 print(expensive_formatting((1,2,3,)))  # Retrieved instantly from cache
 ```
 
