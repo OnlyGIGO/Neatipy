@@ -27,8 +27,12 @@ car=Car(driver=driver)
 df = pd.DataFrame(data)
 lst=[[car,driver,car,[driver,car,driver]] for _ in range(2)]
 tpl=(1,2,3,(),567,)
-
+dct={"test":1,"test2":2,"test3":[1,2,3]}
+st={"apple","banana"
+    }
 Neatipy.neatipy_print(df)
 Neatipy.neatipy_print(car)
 Neatipy.neatipy_print(lst)
 Neatipy.neatipy_print(tpl)
+Neatipy.neatipy_print(dct)
+Neatipy.neatipy_print(st)

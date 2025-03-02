@@ -5,3 +5,6 @@ from .dataframe_formatter import DataFrameFormatter
 from .class_formatter import ClassFormatter
 from .list_formatter import ListFormatter
 from .tuple_formatter import TupleFormatter
+from .bool_formatter import BoolFormatter
+from .set_formatter import SetFormatter
+from .dict_formatter import DictFormatter
