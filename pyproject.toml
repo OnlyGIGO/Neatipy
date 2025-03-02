@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "Neatipy"
+name = "neatipy"
 version = "0.1.0"
 description = "Python object formatting and printing library"
 readme = "README.md"
@@ -29,7 +29,7 @@ Homepage = "https://github.com/OnlyGIGO/Neatipy"
 Repository = "https://github.com/OnlyGIGO/Neatipy"
 
 [tool.setuptools]
-packages = ["Neatipy"]
+packages = ["neatipy","neatipy.core","neatipy.formatters","neatipy.datastructures","neatipy.caching"]
 
 [tool.setuptools.package-data]
-Neatipy = ["*.md"]  
+neatipy = ["*.md"]  

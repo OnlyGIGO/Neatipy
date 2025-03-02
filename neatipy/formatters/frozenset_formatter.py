@@ -4,7 +4,7 @@ class FrozenSetFormatter(BaseFormatter):
     @staticmethod
     @LRUCache.lru_cache(max_size=256)
     def format(obj: frozenset, _depth: int = 0) -> str:
-        from core import NeatipyFormatter  # lazy import to avoid circular imports
+        from neatipy.core import NeatipyFormatter  # lazy import to avoid circular imports
         indent_str = " "*len("FrozenSet: {")
         current_indent = indent_str * _depth
         next_indent = indent_str * (_depth + 1)
