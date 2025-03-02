@@ -30,9 +30,12 @@ tpl=(1,2,3,(),567,)
 dct={"test":1,"test2":2,"test3":[1,2,3]}
 st={"apple","banana"
     }
+frozenst=frozenset([1,2,3,4])
+
 Neatipy.neatipy_print(df)
 Neatipy.neatipy_print(car)
 Neatipy.neatipy_print(lst)
 Neatipy.neatipy_print(tpl)
 Neatipy.neatipy_print(dct)
 Neatipy.neatipy_print(st)
+Neatipy.neatipy_print(frozenst)

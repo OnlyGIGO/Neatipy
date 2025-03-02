@@ -9,6 +9,7 @@ from formatters import TupleFormatter
 from formatters import BoolFormatter
 from formatters import SetFormatter
 from formatters import DictFormatter
+from formatters import FrozenSetFormatter
 import pandas as pd
 class NeatipyFormatter:
     @staticmethod
@@ -28,6 +29,8 @@ class NeatipyFormatter:
                 return DictFormatter.format(obj,_depth)
             case set():
                 return SetFormatter.format(obj,_depth)
+            case frozenset():
+                return FrozenSetFormatter.format(obj,_depth)
             case bool():
                 return BoolFormatter.format(obj)
             case pd.DataFrame():

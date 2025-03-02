@@ -11,5 +11,5 @@ class SetFormatter(BaseFormatter):
         result = "Set: {\n"
         formatted_elements = (NeatipyFormatter.format(element, _depth=_depth + 1) for element in obj)
         result += f",\n".join((f"{next_indent}{element}" for element in formatted_elements))
-        result += f"\n{current_indent})"
+        result += f"\n{current_indent}{"}"}"
         return result

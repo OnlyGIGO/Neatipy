@@ -8,3 +8,4 @@ from .tuple_formatter import TupleFormatter
 from .bool_formatter import BoolFormatter
 from .set_formatter import SetFormatter
 from .dict_formatter import DictFormatter
+from .frozenset_formatter import FrozenSetFormatter
