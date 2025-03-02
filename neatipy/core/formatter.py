@@ -15,6 +15,8 @@ class NeatipyFormatter:
     @staticmethod
     def format(obj:any,_depth:int=0)->str:
         match obj:
+            case bool(): #ordered bool to first bc otherwise int will catch it 
+                return BoolFormatter.format(obj)
             case float():
                 return FloatFormatter.format(obj)
             case int():
@@ -31,8 +33,6 @@ class NeatipyFormatter:
                 return SetFormatter.format(obj,_depth)
             case frozenset():
                 return FrozenSetFormatter.format(obj,_depth)
-            case bool():
-                return BoolFormatter.format(obj)
             case pd.DataFrame():
                 return DataFrameFormatter.format(obj)
             case _ if type(obj).__repr__ is not object.__repr__:#checking that the object's repr is not just the default one
