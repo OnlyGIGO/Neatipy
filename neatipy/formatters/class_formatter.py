@@ -6,7 +6,7 @@ class ClassFormatter(BaseFormatter):
     def format(obj:any,_depth:int=0)->str:
         if _depth>0: #avoiding infinite recursion, but mainly to avoid going through potentially unwanted classes n their methods
             return f"User-defined class: {type(obj).__name__}"
-        from core import NeatipyFormatter
+        from neatipy.core import NeatipyFormatter
         methods=(attr for attr in dir(obj) if callable(getattr(obj,attr)) and not attr.startswith("__"))
         attributes=(attr for attr in dir(obj) if not (attr.startswith("__") or callable(getattr(obj,attr))))
         def generate_class_header():

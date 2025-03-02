@@ -2,13 +2,14 @@
 from neatipy.datastructures import DoublyLinkedList
 from neatipy.datastructures import Node
 from dataclasses import is_dataclass
+from typing import Callable
 
 class LRUCache():
     cache = {}
     doubly_linked_list = DoublyLinkedList()
     _immutables = (tuple, str, int, float, bool, frozenset)
     @staticmethod
-    def is_immutable(obj):
+    def is_immutable(obj:any)->bool:
         """Is immutable helper function"""
         if isinstance(obj, LRUCache._immutables):
             return True
@@ -17,7 +18,7 @@ class LRUCache():
         return False
 
     @staticmethod
-    def lru_cache(max_size=128):
+    def lru_cache(max_size:int=128)->Callable:
         """LRU cache decorator."""
         def decorator(func):
             def wrapper(*args, **kwargs):
