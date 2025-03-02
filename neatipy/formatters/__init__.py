@@ -10,3 +10,4 @@ from .set_formatter import SetFormatter
 from .dict_formatter import DictFormatter
 from .frozenset_formatter import FrozenSetFormatter
 from .numpy_array_formatter import NumpyArrayFormatter
+from .dataclass_formatter import DataClassFormatter

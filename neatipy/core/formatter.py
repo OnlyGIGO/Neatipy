@@ -11,6 +11,8 @@ from formatters import SetFormatter
 from formatters import DictFormatter
 from formatters import FrozenSetFormatter
 from formatters import NumpyArrayFormatter
+from formatters import DataClassFormatter
+from dataclasses import is_dataclass
 import pandas as pd
 import numpy as np
 class NeatipyFormatter:
@@ -39,6 +41,8 @@ class NeatipyFormatter:
                 return NumpyArrayFormatter.format(obj,_depth)
             case pd.DataFrame():
                 return DataFrameFormatter.format(obj)
+            case _ if is_dataclass(obj):
+                return DataClassFormatter.format(obj,_depth)
             case _ if type(obj).__repr__ is not object.__repr__:#checking that the object's repr is not just the default one
                 return repr(obj)
             case _ if type(obj).__module__ != "builtins":

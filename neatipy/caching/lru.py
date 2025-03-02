@@ -7,6 +7,14 @@ class LRUCache():
     cache = {}
     doubly_linked_list = DoublyLinkedList()
     _immutables = (tuple, str, int, float, bool, frozenset)
+    @staticmethod
+    def is_immutable(obj):
+        """Is immutable helper function"""
+        if isinstance(obj, LRUCache._immutables):
+            return True
+        if is_dataclass(obj) and getattr(obj, '__dataclass_fields__', None) and hasattr(obj, '__hash__'):
+            return all(LRUCache.is_immutable(getattr(obj, field)) for field in obj.__dataclass_fields__)
+        return False
 
     @staticmethod
     def lru_cache(max_size=128):
@@ -14,7 +22,7 @@ class LRUCache():
         def decorator(func):
             def wrapper(*args, **kwargs):
                 obj = args[0]
-                if isinstance(obj, LRUCache._immutables) or ((is_dataclass(obj) and getattr(obj, '__dataclass_fields__', None) and hasattr(obj, '__hash__'))):
+                if  isinstance(obj, LRUCache._immutables) or (is_dataclass(obj) and getattr(obj, '__dataclass_fields__', None) and hasattr(obj, '__hash__') and all(LRUCache.is_immutable(getattr(obj, field)) for field in obj.__dataclass_fields__)):
                     node = LRUCache.cache.get(obj, None)
                     if node is None:
                         ret_val = func(*args, **kwargs)
