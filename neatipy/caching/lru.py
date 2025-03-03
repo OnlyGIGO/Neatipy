@@ -5,8 +5,6 @@ from typing import Callable
 
 
 class LRUCache:
-    cache = {}
-    doubly_linked_list = DoublyLinkedList()
     _immutables = (tuple, str, int, float, bool, frozenset)
 
     @staticmethod
@@ -30,6 +28,8 @@ class LRUCache:
         """LRU cache decorator."""
 
         def decorator(func):
+            cache = {}
+            doubly_linked_list = DoublyLinkedList()
             def wrapper(*args, **kwargs):
                 if not args:
                     return func(*args, **kwargs)
@@ -43,20 +43,20 @@ class LRUCache:
                         for field in obj.__dataclass_fields__
                     )
                 ):
-                    node = LRUCache.cache.get(id(obj), None)
+                    node = cache.get(id(obj), None)
                     if node is None:
                         ret_val = func(*args, **kwargs)
                         new_node = Node(ret_val, id(obj))
-                        LRUCache.cache[id(obj)] = new_node
-                        LRUCache.doubly_linked_list.insert_to_head(new_node)
-                        if LRUCache.doubly_linked_list.size > max_size:
-                            key = LRUCache.doubly_linked_list.tail.key
-                            LRUCache.doubly_linked_list.remove_from_tail()
-                            LRUCache.cache.pop(key)
+                        cache[id(obj)] = new_node
+                        doubly_linked_list.insert_to_head(new_node)
+                        if doubly_linked_list.size > max_size:
+                            key = doubly_linked_list.tail.key
+                            doubly_linked_list.remove_from_tail()
+                            cache.pop(key)
                         return ret_val
                     else:
-                        LRUCache.doubly_linked_list.remove(node)
-                        LRUCache.doubly_linked_list.insert_to_head(node)
+                        doubly_linked_list.remove(node)
+                        doubly_linked_list.insert_to_head(node)
                         return node.val
                 else:
                     return func(*args, **kwargs)
