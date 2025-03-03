@@ -5,5 +5,7 @@ class Neatipy:
     formatter = NeatipyFormatter()
 
     @staticmethod
-    def nprint(obj: any) -> None:
-        print(Neatipy.formatter.format(obj))
+    def nprint(*args: any, **kwargs) -> None:
+        print(
+            *(Neatipy.formatter.format(a) for a in args), **kwargs
+        )  # Unpacks the formatted args and prints them, using generator expression to avoid creating a list

@@ -138,3 +138,5 @@ print(
         )
     )
 )
+
+Neatipy.nprint(1, 2, 3, 4, sep="|SEP|\n", end="|END|")
