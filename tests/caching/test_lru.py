@@ -13,8 +13,7 @@ def test_lru_with_immutable():
         return str(id(immutable))
 
     func(immutable)
-    print(LRUCache.cache)
-    assert LRUCache.cache.get(id(immutable)).val == str(
+    assert func._cache.get(id(immutable)).val == str(
         id(immutable)
     )  # same as func's return value meaning it was cached
 
@@ -27,4 +26,4 @@ def test_lru_with_mutable():
         return str(id(mutable))
 
     func(mutable)
-    assert LRUCache.cache.get(id(mutable), 0) == 0
+    assert func._cache.get(id(mutable), 0) == 0
