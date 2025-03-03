@@ -13,6 +13,8 @@ class DoublyLinkedList:
 
     def remove_from_tail(self) -> None:
         """Remove from tail"""
+        if self.is_empty():
+            return
         new_tail = self.tail.prev
         if new_tail is None:
             self.head = None
@@ -48,6 +50,8 @@ class DoublyLinkedList:
         """Insert node to head"""
         if self.is_empty():
             self.head = node
+            self.head.prev = None
+            self.head.next = None
             self.tail = self.head
             self.size += 1
             return
@@ -55,4 +59,5 @@ class DoublyLinkedList:
         old_head.prev = node
         self.head = node
         self.head.next = old_head
+        self.head.prev = None
         self.size += 1
