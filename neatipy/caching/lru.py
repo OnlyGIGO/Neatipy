@@ -30,6 +30,7 @@ class LRUCache:
         def decorator(func):
             cache = {}
             doubly_linked_list = DoublyLinkedList()
+
             def wrapper(*args, **kwargs):
                 if not args:
                     return func(*args, **kwargs)
