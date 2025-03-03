@@ -2,6 +2,7 @@ from neatipy.caching import LRUCache
 from .base_formatter import BaseFormatter
 import inspect
 
+
 class DataClassFormatter(BaseFormatter):
     @staticmethod
     @LRUCache.lru_cache(max_size=256)
@@ -35,9 +36,11 @@ class DataClassFormatter(BaseFormatter):
         def generate_methods():
             yield f"{"-"*3}Methods:\n"
             for method in methods:
-                fullArgs=inspect.getfullargspec(getattr(obj,method))
+                fullArgs = inspect.getfullargspec(getattr(obj, method))
                 argsString = ", ".join(fullArgs.args)
-                kwargsString = ", ".join([f"{key}={value}" for key, value in fullArgs.kwonlyargs])
+                kwargsString = ", ".join(
+                    [f"{key}={value}" for key, value in fullArgs.kwonlyargs]
+                )
                 yield f"{method}({argsString}{f', {kwargsString}' if kwargsString else ''})\n"
 
         return f"{"".join(generate_class_header())}{"".join(generate_attributes())}{"".join(generate_methods())}"
