@@ -70,7 +70,7 @@ Unlike traditional formatting libraries, **Neatipy** focuses on:
 
 ## 🛠️ API Reference
 
-### `Neatipy.nprint(obj: any) -> None`
+### `Neatipy.nprint(*args: any, **kwargs: any) -> None`
 Nicely prints an object with auto-detection of formatting style. Uses formatter internally.
 
 ### `NeatipyFormatter.format(obj: any) -> str`
