@@ -1,6 +1,6 @@
 from neatipy.caching import LRUCache
 from .base_formatter import BaseFormatter
-
+import inspect
 
 class DataClassFormatter(BaseFormatter):
     @staticmethod
@@ -24,17 +24,20 @@ class DataClassFormatter(BaseFormatter):
         )
 
         def generate_class_header():
-            yield f"Dataclass: {type(obj).__name__}{"\n|"*1}\n"
+            yield f"Dataclass: {type(obj).__name__}{"\n"}\n"
 
         def generate_attributes():
             yield f"{"-"*3}Attributes:\n"
             for attribute in attributes:
-                yield f"| {attribute}: {NeatipyFormatter.format(getattr(obj,attribute),_depth=1)}\n"
-            yield "|\n"
+                yield f"{attribute}: {NeatipyFormatter.format(getattr(obj,attribute),_depth=1)}\n"
+            yield "\n"
 
         def generate_methods():
             yield f"{"-"*3}Methods:\n"
             for method in methods:
-                yield f"| {method}\n"
+                fullArgs=inspect.getfullargspec(getattr(obj,method))
+                argsString = ", ".join(fullArgs.args)
+                kwargsString = ", ".join([f"{key}={value}" for key, value in fullArgs.kwonlyargs])
+                yield f"{method}({argsString}{f', {kwargsString}' if kwargsString else ''})\n"
 
         return f"{"".join(generate_class_header())}{"".join(generate_attributes())}{"".join(generate_methods())}"
