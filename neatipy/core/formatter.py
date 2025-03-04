@@ -11,6 +11,7 @@ from neatipy.formatters import DictFormatter
 from neatipy.formatters import FrozenSetFormatter
 from neatipy.formatters import NumpyArrayFormatter
 from neatipy.formatters import DataClassFormatter
+from neatipy.formatters import DataFrameFormatterC
 from dataclasses import is_dataclass
 import pandas as pd
 import numpy as np
@@ -41,7 +42,7 @@ class NeatipyFormatter:
             case np.ndarray():
                 return NumpyArrayFormatter.format(obj, _depth)
             case pd.DataFrame():
-                return DataFrameFormatter.format(obj)
+                return DataFrameFormatterC.format(obj)
             case _ if is_dataclass(obj):
                 return DataClassFormatter.format(obj, _depth)
             case _ if (

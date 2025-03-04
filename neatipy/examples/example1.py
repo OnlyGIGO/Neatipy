@@ -3,11 +3,9 @@ from neatipy import NeatipyFormatter
 import pandas as pd
 import numpy as np
 from dataclasses import dataclass, field
-from typing import List, Dict, Tuple, Any
-from collections.abc import Mapping
+from typing import Tuple
 import time
 
-# Basic examples
 Neatipy.nprint(3.141)
 Neatipy.nprint("Hello world")
 
@@ -139,4 +137,6 @@ print(
     )
 )
 
-Neatipy.nprint(1, 2, 3, 4, sep="|SEP|\n", end="|END|")
+Neatipy.nprint(1, 2, 3, 4, sep="|SEP|\n", end="|END|\n")
+
+
