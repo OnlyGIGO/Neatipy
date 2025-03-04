@@ -116,7 +116,7 @@ static PyObject *format_dataframe(PyObject *self, PyObject *args)
     }
 
     /* Prepare an output buffer and track the used size manually */
-    unsigned long long buffer_size = 1024;
+    unsigned long long buffer_size = 4096;
     unsigned long long used_size = 0;
     char *buffer = malloc(buffer_size);
     if (!buffer)
@@ -150,16 +150,12 @@ static PyObject *format_dataframe(PyObject *self, PyObject *args)
     memset(border, '-', table_width);
     border[table_width] = '\n';
     border[table_width + 1] = '\0';
-    {
-        size_t len = strlen(border);
-        memcpy(buffer + used_size, border, len);
-        used_size += len;
-        buffer[used_size] = '\0';
-    }
-    free(border);
 
-    /* Build header row with column names centered.
-       Each cell is now wrapped with "|" on both sides. */
+    size_t borderlen = strlen(border);
+    memcpy(buffer + used_size, border, borderlen);
+    used_size += borderlen;
+    buffer[used_size] = '\0';
+
     for (Py_ssize_t j = 0; j < cols_len; j++)
     {
         while (buffer_size < used_size + 2)
@@ -265,24 +261,10 @@ static PyObject *format_dataframe(PyObject *self, PyObject *args)
             return NULL;
         }
     }
-    border = malloc(table_width + 2);
-    if (!border)
-    {
-        free(buffer);
-        free(longest_datas);
-        PyErr_SetString(PyExc_MemoryError, "Failed to allocate memory for border");
-        return NULL;
-    }
-    memset(border, '-', table_width);
-    border[table_width] = '\n';
-    border[table_width + 1] = '\0';
-    {
-        size_t len = strlen(border);
-        memcpy(buffer + used_size, border, len);
-        used_size += len;
-        buffer[used_size] = '\0';
-    }
-    free(border);
+
+    memcpy(buffer + used_size, border, borderlen);
+    used_size += borderlen;
+    buffer[used_size] = '\0';
 
     /* Build data rows with centered values */
     for (Py_ssize_t i = 0; i < data_len; i++)
@@ -313,6 +295,7 @@ static PyObject *format_dataframe(PyObject *self, PyObject *args)
             char *cell = malloc(content_width + 1);
             if (!cell)
             {
+                free(border);
                 free(buffer);
                 free(longest_datas);
                 PyErr_SetString(PyExc_MemoryError, "Failed to allocate memory for data cell");
@@ -325,6 +308,7 @@ static PyObject *format_dataframe(PyObject *self, PyObject *args)
             PyObject *str_obj = PyObject_Str(item);
             if (!str_obj)
             {
+                free(border);
                 free(cell);
                 free(buffer);
                 free(longest_datas);
@@ -392,30 +376,18 @@ static PyObject *format_dataframe(PyObject *self, PyObject *args)
         buffer = realloc(buffer, buffer_size);
         if (!buffer)
         {
+            free(border);
             free(longest_datas);
             PyErr_SetString(PyExc_MemoryError, "Failed to reallocate buffer");
             return NULL;
         }
     }
-    border = malloc(table_width + 2);
-    if (!border)
-    {
-        free(buffer);
-        free(longest_datas);
-        PyErr_SetString(PyExc_MemoryError, "Failed to allocate memory for border");
-        return NULL;
-    }
-    memset(border, '-', table_width);
-    border[table_width] = '\n';
-    border[table_width + 1] = '\0';
-    {
-        size_t len = strlen(border);
-        memcpy(buffer + used_size, border, len);
-        used_size += len;
-        buffer[used_size] = '\0';
-    }
-    free(border);
 
+    memcpy(buffer + used_size, border, borderlen);
+    used_size += borderlen;
+    buffer[used_size] = '\0';
+
+    free(border);
     PyObject *result = PyUnicode_FromString(buffer);
     free(buffer);
     free(longest_datas);
