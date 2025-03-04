@@ -5,7 +5,7 @@ ext_modules = [
     Extension(
         "neatipy_c",  # Name of the extension module.
         sources=["neatipy/c/dataframe_formatter.c"],
-        extra_compile_args=["-Ofast", "-march=native", "-funroll-loops"]
+        extra_compile_args=["-Ofast", "-march=native", "-funroll-loops"],
     )
 ]
 
@@ -24,8 +24,5 @@ setup(
     license="MIT",
     packages=find_packages(),
     ext_modules=ext_modules,
-    install_requires=[
-        "numpy>=2.2.0",
-        "pandas>=2.2.0"
-    ],
+    install_requires=["numpy>=2.2.0", "pandas>=2.2.0"],
 )
